@@ -27,6 +27,7 @@ export function microplus(){
   scene.add(ambientLight)
   scene.add(directionalLight)
   controls.autoRotate = true
+  controls.autoRotateSpeed = 15
 
   // Cargar el modelo .OBJ
   const loader = new OBJLoader();
