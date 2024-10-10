@@ -63,10 +63,11 @@ export function microplus(){
       }
     },
     (xhr) => {
+      
+      xhr.loaded == xhr.total ? console.log('Objeto cargado.') : null
+      
       // Calcular el porcentaje de carga
       const percentage = Math.round((xhr.loaded / xhr.total) * 100);
-
-      console.log(percentage + '% cargado');
       
       // Actualizar el texto del modal con el porcentaje de carga
       if (loadingText) {

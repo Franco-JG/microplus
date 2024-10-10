@@ -12,11 +12,11 @@ export function createRenderer(canvas: HTMLCanvasElement): WebGLRenderer {
 	renderer.shadowMap.type = PCFShadowMap
 	
 	renderer.setSize(sizes.width, sizes.height)
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+	renderer.setPixelRatio(window.devicePixelRatio)
 
 	window.addEventListener('resize',()=>{
 		renderer.setSize(sizes.width, sizes.height);
-		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+		// renderer.setPixelRatio(window.devicePixelRatio)
 	})
 
 	return renderer
