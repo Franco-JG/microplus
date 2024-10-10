@@ -26,8 +26,20 @@ export function microplus(){
   const ambientLight =  createAmbientLight()
   scene.add(ambientLight)
   scene.add(directionalLight)
+
   controls.autoRotate = true
   controls.autoRotateSpeed = 15
+  controls.enablePan = false
+  controls.enableZoom = false
+
+  // Obtener el modal y el texto del porcentaje
+  const loadingModal = document.getElementById('loadingModal');
+  const loadingText = document.getElementById('loadingText');
+
+  // Mostrar el modal
+  if (loadingModal) {
+    loadingModal.style.display = 'block';
+  }
 
   // Cargar el modelo .OBJ
   const loader = new OBJLoader();
@@ -45,9 +57,21 @@ export function microplus(){
       });
       // Añadir el objeto cargado a la escena
       scene.add(object);
+      // Ocultar el modal cuando se complete la carga
+      if (loadingModal) {
+        loadingModal.style.display = 'none';
+      }
     },
     (xhr) => {
-      console.log((xhr.loaded / xhr.total * 100) + '% cargado'); // Progreso de carga
+      // Calcular el porcentaje de carga
+      const percentage = Math.round((xhr.loaded / xhr.total) * 100);
+
+      console.log(percentage + '% cargado');
+      
+      // Actualizar el texto del modal con el porcentaje de carga
+      if (loadingText) {
+        loadingText.textContent = `Cargando objeto 3D... ${percentage}%`;
+      }
     },
     (error) => {
       console.log('Ocurrió un error al cargar el OBJ:', error);  // Manejo de errores
