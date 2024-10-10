@@ -1,24 +1,25 @@
 import { WebGLRenderer, PCFShadowMap } from "three";
-import { sizes } from "./camera.ts";
+import { sizes } from "../main";
 
+export function createRenderer(canvas: HTMLCanvasElement): WebGLRenderer {
+	const renderer =  new WebGLRenderer({
+		canvas,
+		alpha: true
+	})
 
-//Renderer
-const canvas: HTMLElement = document.querySelector('#scene') as HTMLElement
-
-export const renderer =  new WebGLRenderer({
-    canvas,
-  })
-  
-renderer.shadowMap.enabled = true
-renderer.shadowMap.type = PCFShadowMap
-
-export function updateRenderer() {
+		
+	renderer.shadowMap.enabled = true
+	renderer.shadowMap.type = PCFShadowMap
+	
 	renderer.setSize(sizes.width, sizes.height)
-	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+	renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+
+	window.addEventListener('resize',()=>{
+		renderer.setSize(sizes.width, sizes.height);
+		renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+	})
+
+	return renderer
 }
 
-window.addEventListener('resize', () => {
-	sizes.width = window.innerWidth
-	sizes.height =  window.innerHeight
-	updateRenderer()
-})
+
