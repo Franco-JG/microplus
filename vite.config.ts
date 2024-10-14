@@ -2,6 +2,9 @@ import { defineConfig } from "vite";
 import type { UserConfig } from "vite";
 
 export default defineConfig({
+    server: {
+        host: true,  
+    },
     base: '/microplus/',
     build: {
         outDir: 'docs'

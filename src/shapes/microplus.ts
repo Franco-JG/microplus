@@ -12,7 +12,7 @@ import { generateArticle } from "../utils.ts";
 export function microplus(){
 
   const data = {
-    title: 'Microplus',
+    title: 'Rhipicephalus (Boophilus) microplus',
     description: 'Es una garrapata de gran importancia veterinaria que afecta al ganado en regiones tropicales y subtropicales. En Yucatán, es un ectoparásito común en bovinos, donde causa enfermedades como la babesiosis y la anaplasmosis, las cuales impactan negativamente la producción ganadera. Esta garrapata se alimenta de la sangre del ganado, provocando pérdida de peso, menor producción de leche y, en casos severos, la muerte de los animales. Las condiciones cálidas y húmedas de Yucatán favorecen su proliferación.'
   }
 
@@ -23,14 +23,16 @@ export function microplus(){
   const renderer = createRenderer(canvas)
   const controls = createOrbitControls(camera, renderer)
   const directionalLight = createDirectionalLight()
+  const directionalLight2 = createDirectionalLight()
   const ambientLight =  createAmbientLight()
   scene.add(ambientLight)
   scene.add(directionalLight)
+  directionalLight2.position.set(0,-5,0)
+  scene.add(directionalLight2)
 
   controls.autoRotate = true
   controls.autoRotateSpeed = 15
   controls.enablePan = false
-  controls.enableZoom = false
 
   // Obtener el modal y el texto del porcentaje
   const loadingModal = document.getElementById('loadingModal');
@@ -44,7 +46,7 @@ export function microplus(){
   // Cargar el modelo .OBJ
   const loader = new OBJLoader();
   loader.load(
-    'microplus.3.1.obj', // Ruta al archivo .obj
+    'microplus.2.blend6.obj', // Ruta al archivo .obj
     (object) => {
       // Recorrer el objeto para acceder a las mallas
       object.traverse((child) => {
@@ -52,7 +54,7 @@ export function microplus(){
           // Aquí puedes modificar la posición o cualquier otra propiedad
           child.position.set(0, 0, 0); // Cambiar la posición del objeto
           child.receiveShadow = true;  // Si quieres que el objeto reciba sombras
-          child.rotateX(Math.PI/180 * 90)
+          child.rotateZ(Math.PI/180 * -90)
         }
       });
       // Añadir el objeto cargado a la escena
@@ -79,6 +81,7 @@ export function microplus(){
     }
   );
   
+
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
