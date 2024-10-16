@@ -1,5 +1,5 @@
-import { Mesh } from "three";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
+import { AxesHelper, Mesh } from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; // Cambiar OBJLoader por GLTFLoader
 
 import { createScene } from "../core/scene.ts";
 import { createCamera } from '../core/camera.ts';
@@ -27,7 +27,7 @@ export function microplus(){
   const ambientLight =  createAmbientLight()
   scene.add(ambientLight)
   scene.add(directionalLight)
-  directionalLight2.position.set(0,-5,0)
+  directionalLight2.position.set(0, -5, 0)
   scene.add(directionalLight2)
 
   controls.autoRotate = true
@@ -43,33 +43,33 @@ export function microplus(){
     loadingModal.style.display = 'block';
   }
 
-  // Cargar el modelo .OBJ
-  const loader = new OBJLoader();
+  // Cargar el modelo .GLB en lugar de .OBJ
+  const loader = new GLTFLoader();
   loader.load(
-    'microplus.2.blend6.obj', // Ruta al archivo .obj
-    (object) => {
-      // Recorrer el objeto para acceder a las mallas
-      object.traverse((child) => {
+    'microplus.2.blend7.glb', // Ruta al archivo .glb
+    (gltf) => {
+      // Recorrer el modelo gltf.scene para acceder a las mallas
+      gltf.scene.traverse((child) => {
         if (child instanceof Mesh) {
-          // Aquí puedes modificar la posición o cualquier otra propiedad
-          child.position.set(0, 0, 0); // Cambiar la posición del objeto
-          child.receiveShadow = true;  // Si quieres que el objeto reciba sombras
-          child.rotateZ(Math.PI/180 * -90)
+          // Modificar la posición o cualquier otra propiedad
+          child.receiveShadow = true;
+          child.rotation.x = Math.PI/180 * -90
         }
       });
+
       // Añadir el objeto cargado a la escena
-      scene.add(object);
+      scene.add(gltf.scene);
+
       // Ocultar el modal cuando se complete la carga
       if (loadingModal) {
         loadingModal.style.display = 'none';
       }
     },
     (xhr) => {
-      
-      xhr.loaded == xhr.total ? console.log('Objeto cargado.') : null
+      xhr.loaded === xhr.total ? console.log('Modelo GLB cargado.') : null;
       
       // Calcular el porcentaje de carga
-      const percentage = Math.round((xhr.loaded / xhr.total) * 100);
+      const percentage = Math.round((xhr.loaded / xhr.total) * 100);      
       
       // Actualizar el texto del modal con el porcentaje de carga
       if (loadingText) {
@@ -77,15 +77,16 @@ export function microplus(){
       }
     },
     (error) => {
-      console.log('Ocurrió un error al cargar el OBJ:', error);  // Manejo de errores
+      console.log('Ocurrió un error al cargar el GLB:', error);  // Manejo de errores
     }
   );
   
+  scene.add(new AxesHelper(20))
 
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
-    controls.update()
+    controls.update();
   }
 
   animate();
