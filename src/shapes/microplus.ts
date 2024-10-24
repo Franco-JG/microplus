@@ -1,4 +1,4 @@
-import { AxesHelper, Mesh } from "three";
+import { Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; // Cambiar OBJLoader por GLTFLoader
 
 import { createScene } from "../core/scene.ts";
@@ -46,14 +46,15 @@ export function microplus(){
   // Cargar el modelo .GLB en lugar de .OBJ
   const loader = new GLTFLoader();
   loader.load(
-    'microplus.2.blend7.glb', // Ruta al archivo .glb
+    'microplus.2.blend8.glb', // Ruta al archivo .glb
     (gltf) => {
       // Recorrer el modelo gltf.scene para acceder a las mallas
       gltf.scene.traverse((child) => {
         if (child instanceof Mesh) {
           // Modificar la posición o cualquier otra propiedad
           child.receiveShadow = true;
-          child.rotation.x = Math.PI/180 * -90
+          child.rotation.x = Math.PI/180 * 90
+          child.position.y = 0
         }
       });
 
@@ -81,7 +82,7 @@ export function microplus(){
     }
   );
   
-  scene.add(new AxesHelper(20))
+  // scene.add(new AxesHelper(20))
 
   function animate() {
     requestAnimationFrame(animate);
