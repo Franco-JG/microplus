@@ -4,7 +4,7 @@ import { sizes } from "../main";
 export function createRenderer(canvas: HTMLCanvasElement): WebGLRenderer {
 	const renderer =  new WebGLRenderer({
 		canvas,
-		alpha: true,
+		// alpha: true,
 		antialias: true
 	})
 

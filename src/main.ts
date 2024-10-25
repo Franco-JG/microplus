@@ -1,5 +1,6 @@
 import './style.css'
 import { microplus } from "./shapes/microplus.ts";
+import { materialTest } from './shapes/material_test.ts';
 
 export const sizes = {
   width: 0,
@@ -17,5 +18,6 @@ export function onWindowResize() {
 window.addEventListener('resize', onWindowResize);
 
 microplus()     //Genera el canvas
+materialTest()
 
 onWindowResize();  //Ajusta las medidas del canvas

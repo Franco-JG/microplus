@@ -1,7 +1,7 @@
 import { AmbientLight, DirectionalLight } from "three"
 //Lights
 export function createAmbientLight(){
-    const ambientLight = new AmbientLight(0xffffff, 1)
+    const ambientLight = new AmbientLight(0xffffff, 0.6)
 
     return ambientLight
 }
