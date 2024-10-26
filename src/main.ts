@@ -1,6 +1,6 @@
 import './style.css'
 import { microplus } from "./shapes/microplus.ts";
-import { materialTest } from './shapes/material_test.ts';
+// import { materialTest } from './shapes/material_test.ts';
 
 export const sizes = {
   width: 0,
