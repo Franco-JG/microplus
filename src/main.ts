@@ -18,6 +18,6 @@ export function onWindowResize() {
 window.addEventListener('resize', onWindowResize);
 
 microplus()     //Genera el canvas
-materialTest()
+// materialTest()
 
 onWindowResize();  //Ajusta las medidas del canvas
