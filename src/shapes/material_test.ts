@@ -1,4 +1,4 @@
-import {  DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
+// import {  DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; // Cambiar OBJLoader por GLTFLoader
 
 import { createScene } from "../core/scene.ts";
