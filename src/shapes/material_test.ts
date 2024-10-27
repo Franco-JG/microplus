@@ -1,4 +1,4 @@
-import {  DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
+// import {  DoubleSide, Mesh, MeshStandardMaterial, PlaneGeometry } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; // Cambiar OBJLoader por GLTFLoader
 
 import { createScene } from "../core/scene.ts";
@@ -13,7 +13,7 @@ export function materialTest(){
 
   const data = {
     title: 'Material glb test',
-    description: 'Carga de texturas desde un archivo glb'
+    description: 'Prueba de carga de una esfera creada en Blender 2.93.9 con mapa de uv, color, roughness y desplazamiento, hecho con material procedural y exportado en formato .glb'
   }
 
   const canvas = generateArticle(data)
@@ -28,39 +28,35 @@ export function materialTest(){
   scene.add(ambientLight)
   scene.add(directionalLight)
   directionalLight2.position.set(0, -5, 0)
-  // scene.add(directionalLight2)
+  camera.position.z = 4
 
   controls.autoRotate = true
   controls.autoRotateSpeed = 5
   controls.enablePan = false
 
-  const plane = new Mesh(
-    new PlaneGeometry(10,10),
-    new MeshStandardMaterial({ color: 0x201919, side: DoubleSide})
-  )
-  plane.receiveShadow = true
-  plane.rotation.x = Math.PI/180 * 90
-  plane.position.y = -1
-  scene.add(plane)
 
   // Cargar el modelo .GLB en lugar de .OBJ
   const loader = new GLTFLoader();
   loader.load(
-    'test_material.glb', // Ruta al archivo .glb
+    'test_material2.glb', // Ruta al archivo .glb
     (gltf) => {
-      // Recorrer el modelo gltf.scene para acceder a las mallas
-      gltf.scene.traverse((child) => {
-        if (child instanceof Mesh) {
-          // Modificar la posición o cualquier otra propiedad
-          // child.receiveShadow = true;
-          child.castShadow = true
-          // child.rotation.x = Math.PI/180 * 90
-          child.position.y = 0
-        }
-      });
+      // // Recorrer el modelo gltf.scene para acceder a las mallas
+      // gltf.scene.traverse((child) => {
+      //   if (child instanceof Mesh) {
+      //     // Modificar la posición o cualquier otra propiedad
+      //     // child.receiveShadow = true;
+      //     child.castShadow = true
+      //     // child.rotation.x = Math.PI/180 * 90
+      //     child.position.y = 0
+      //   }
+      // });
+      const sphereGLB = gltf.scene.children[0];
+      sphereGLB.position.set(0,0,0)
+      // console.log(sphereGLB);
+      
 
       // Añadir el objeto cargado a la escena
-      scene.add(gltf.scene);
+      scene.add(sphereGLB);
 
     },
     (xhr) => {

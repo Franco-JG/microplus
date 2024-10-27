@@ -67,14 +67,11 @@ export function microplus(){
       }
     },
     (xhr) => {
-      xhr.loaded === xhr.total ? console.log('Modelo GLB cargado.') : null;
-      
-      // Calcular el porcentaje de carga
-      const percentage = Math.round((xhr.loaded / xhr.total) * 100);      
+      xhr.loaded === xhr.total ? console.log('Modelo GLB cargado.') : null;    
       
       // Actualizar el texto del modal con el porcentaje de carga
       if (loadingText) {
-        loadingText.textContent = `Cargando objeto 3D... ${percentage}%`;
+        loadingText.textContent = `Cargando objeto 3D...`;
       }
     },
     (error) => {
