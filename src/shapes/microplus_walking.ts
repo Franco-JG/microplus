@@ -1,4 +1,4 @@
-import { AnimationMixer, Clock, LoopRepeat, Mesh } from "three";
+import { AnimationMixer, LoopRepeat, Mesh } from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js"; // Cambiar OBJLoader por GLTFLoader
 
 import { createScene } from "../core/scene.ts";
@@ -96,7 +96,7 @@ export function microplusWalking(){
   );
   
   // scene.add(new AxesHelper(20))
-  const clock = new Clock();
+  // const clock = new Clock();
   function animate() {
     const delta = 0.05
     requestAnimationFrame(animate);
